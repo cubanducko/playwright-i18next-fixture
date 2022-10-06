@@ -21,8 +21,8 @@
 
 ## 🚀 Use case
 
-<p>Selecting by text can be a bit risky in a e2e context, since translations may change and you may want to test with multiple languages</p>
-<p>With the `i18next` you can select text by key and create re-usable multi-language test</p>
+<p>Selecting by text can be a problem with e2e testing. Tying your expectations to text can led to problems with multi-language pages.
+<p>With the power <code>i18next</code> and fixtures we can easily create multi-language selectors by defining keys for our text selectors</p>
 
 <br>
 
