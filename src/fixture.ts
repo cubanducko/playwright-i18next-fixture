@@ -23,11 +23,13 @@ export type I18nPlaywrightFixture = {
 export type I18nPlaywrightOptions = {
   plugins?: (Module | NewableModule<Module> | Newable<Module>)[];
   options?: InitOptions;
+  cache?: boolean;
 };
 
 export const createI18nFixture = ({
   plugins = [],
   options = {},
+  cache = true,
 }: I18nPlaywrightOptions): Fixtures<
   I18nPlaywrightFixture,
   PlaywrightWorkerArgs & PlaywrightWorkerOptions,
@@ -37,7 +39,7 @@ export const createI18nFixture = ({
   return {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     i18n: async ({ page: _ }, use) => {
-      const i18nInitialized = await initI18n({ plugins, options });
+      const i18nInitialized = await initI18n({ plugins, options, cache });
       await use(i18nInitialized);
     },
     t: async ({ i18n }, use) => {
