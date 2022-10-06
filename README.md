@@ -44,19 +44,24 @@ npm install --save-dev playwright-i18next-fixture
 
 ## 📝 Usage
 
-An `i18next` instance must be available in `window`. You can use this small plugin for `i18next` or expose it manually with
-
-```ts
-// With plugin
-
-// Without plugin
-```
-
-Include the `i18nFixture` in the `@playwright/test` extend
+Create the `i18next` instance as you would in your browser
 
 ```ts
 import { test as base } from "@playwright/test";
-import { i18nFixture } from "playwright-i18next-fixture";
+import { createI18nFixture } from "../src/fixture";
+
+const i18nFixture = createI18nFixture({
+  // i18n plugins
+  use: [ ... ]
+  // i18n configuration options
+  options: {
+    lng: 'en',
+    resources: { ... }
+  },
+  // Fetch translations in every test or fetch once
+  // Default: true
+  cache: false
+})
 
 const test = base.extend(i18nFixture);
 
