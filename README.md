@@ -48,11 +48,11 @@ Create the `i18next` instance as you would in your browser
 
 ```ts
 import { test as base } from "@playwright/test";
-import { createI18nFixture } from "../src/fixture";
+import { createI18nFixture, getI18nInstance } from "playwright-i18next-fixture";
 
 const i18nFixture = createI18nFixture({
   // i18n plugins
-  use: [ ... ]
+  plugins: [ ... ]
   // i18n configuration options
   options: {
     lng: 'en',
@@ -61,12 +61,21 @@ const i18nFixture = createI18nFixture({
   // Fetch translations in every test or fetch once
   // Default: true
   cache: false
+  // Run as auto fixture to be available through all tests by getI18nInstance()
+  // Default: true
+  auto: true
 })
 
 const test = base.extend(i18nFixture);
 
 // Context is now shared
 test("my test", async ({ i18n, t }) => {});
+
+// If auto is enabled, you can also use the manual fn
+// This is useful to inject directly in classes
+class ExampleClass {
+   readonly i18n: i18n = getI18nInstance()
+}
 ```
 
 <br>

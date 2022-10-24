@@ -7,7 +7,9 @@ export async function initI18n({
   plugins,
   options,
   cache,
-}: Required<I18nPlaywrightOptions>): Promise<i18n> {
+}: Required<
+  Pick<I18nPlaywrightOptions, "plugins" | "options" | "cache">
+>): Promise<i18n> {
   if (!cache || !storedI18n || !storedI18n.isInitialized) {
     const i18n = plugins.reduce(
       (i18n, plugin) => (i18n = i18n.use(plugin)),

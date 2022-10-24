@@ -24,12 +24,14 @@ export type I18nPlaywrightOptions = {
   plugins?: (Module | NewableModule<Module> | Newable<Module>)[];
   options?: InitOptions;
   cache?: boolean;
+  auto?: boolean;
 };
 
 export const createI18nFixture = ({
   plugins = [],
   options = {},
   cache = true,
+  auto = true,
 }: I18nPlaywrightOptions): Fixtures<
   I18nPlaywrightFixture,
   PlaywrightWorkerArgs & PlaywrightWorkerOptions,
@@ -43,7 +45,7 @@ export const createI18nFixture = ({
         const i18nInitialized = await initI18n({ plugins, options, cache });
         await use(i18nInitialized);
       },
-      { auto: true },
+      { auto },
     ],
     t: async ({ i18n }, use) => {
       await use(i18n.t);
