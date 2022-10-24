@@ -53,12 +53,6 @@
   "peerDependencies": {
     "@playwright/test": "^1.26.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "pnpm lint && pnpm build && pnpm test"
-    }
-  },
   "release": {
     "branches": [
       "main",
