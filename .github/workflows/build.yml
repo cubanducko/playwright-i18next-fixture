@@ -74,7 +74,7 @@ jobs:
         run: pnpm build
 
       - name: Install playwright
-        run: npx playwright install-deps chromium
+        run: npx playwright install --with-deps
 
       - name: Run e2e tests
         run: pnpm test
