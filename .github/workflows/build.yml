@@ -54,8 +54,8 @@ jobs:
         if: ${{ always() }}
         run: pnpm lint:types
 
-  unit-tests:
-    name: Unit tests
+  e2e-tests:
+    name: e2e tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -73,13 +73,13 @@ jobs:
       - name: Run build
         run: pnpm build
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install playwright
+        run: npx playwright install-deps chromium
 
-      - name: Run unit tests
+      - name: Run e2e tests
         run: pnpm test
   publish:
-    needs: [build, lint, unit-tests]
+    needs: [build, lint, e2e-tests]
     name: Publish on NPM
     runs-on: ubuntu-latest
     steps:
