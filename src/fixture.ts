@@ -37,11 +37,14 @@ export const createI18nFixture = ({
   PlaywrightWorkerArgs & PlaywrightWorkerOptions
 > => {
   return {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    i18n: async ({ page: _ }, use) => {
-      const i18nInitialized = await initI18n({ plugins, options, cache });
-      await use(i18nInitialized);
-    },
+    i18n: [
+      // eslint-disable-next-line no-empty-pattern
+      async ({}, use) => {
+        const i18nInitialized = await initI18n({ plugins, options, cache });
+        await use(i18nInitialized);
+      },
+      { auto: true },
+    ],
     t: async ({ i18n }, use) => {
       await use(i18n.t);
     },

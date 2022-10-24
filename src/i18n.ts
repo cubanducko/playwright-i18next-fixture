@@ -19,7 +19,7 @@ export async function initI18n({
   return storedI18n;
 }
 
-export function getCurrentI18nInstance() {
+export function getI18nInstance() {
   if (!storedI18n) {
     throw new Error("No i18n instance initialized");
   }
